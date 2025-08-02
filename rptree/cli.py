@@ -13,7 +13,7 @@ def main():
     if not root_dir.is_dir():
         print("The specified root directory does not exist.")
         sys.exit()
-    tree = DirectoryTree(root_dir) # creates directory tree object
+    tree = DirectoryTree(root_dir, output_file = args.output_file) # creates directory tree object
     tree.generate() # displays tree object
 
 def parse_cmd_line_arguments():
@@ -30,6 +30,14 @@ def parse_cmd_line_arguments():
         nargs = "?", # define number of values program can take under the argument at hand
         default = ".", # provides default value for argument at hand
         help = "Generate a full directory tree stating at ROOT_DIR", # describes what argument does
+    )
+    parser.add_argument(
+        "-o",
+        "--output_file",
+        metavar = "OUTPUT_FILE",
+        nargs = "?",
+        default = sys.stdout,
+        help = "Generate a full directory tree and save it to a file",
     )
     return parser.parse_args() # returns a namespace object with the supplied arguments
 
